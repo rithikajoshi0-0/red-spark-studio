@@ -25,8 +25,6 @@ export async function submitContactForm(data: Omit<ContactFormSubmission, 'id' |
   const { data: submission, error } = await supabase
     .from('contact_form_submissions')
     .insert([data])
-    .select()
-    .single()
 
   if (error) {
     throw error
