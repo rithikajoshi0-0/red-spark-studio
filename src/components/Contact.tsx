@@ -32,7 +32,7 @@ const Contact = () => {
                   <Mail className="w-5 h-5 text-primary mt-1" />
                   <div>
                     <p className="font-medium text-foreground">Email</p>
-                    <p className="text-muted-foreground">hello@servicehub.in</p>
+                    <p className="text-muted-foreground">rithikajoshi.b@gmail.com</p>
                   </div>
                 </div>
                 
@@ -40,7 +40,7 @@ const Contact = () => {
                   <Phone className="w-5 h-5 text-primary mt-1" />
                   <div>
                     <p className="font-medium text-foreground">Phone</p>
-                    <p className="text-muted-foreground">+91 98765 43210</p>
+                    <p className="text-muted-foreground">+91 97917 69420</p>
                   </div>
                 </div>
                 
@@ -48,22 +48,14 @@ const Contact = () => {
                   <MapPin className="w-5 h-5 text-primary mt-1" />
                   <div>
                     <p className="font-medium text-foreground">Location</p>
-                    <p className="text-muted-foreground">Mumbai, Maharashtra, India</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start space-x-3">
-                  <Clock className="w-5 h-5 text-primary mt-1" />
-                  <div>
-                    <p className="font-medium text-foreground">Response Time</p>
-                    <p className="text-muted-foreground">Within 2 hours (Mon-Sat)</p>
+                    <p className="text-muted-foreground">Chennai, Tamil Nadu, India</p>
                   </div>
                 </div>
 
                 <div className="bg-primary-light p-4 rounded-lg">
-                  <p className="text-sm font-medium text-primary mb-2">Quick Response Guarantee</p>
+                  <p className="text-sm font-medium text-primary mb-2">Ready to Help</p>
                   <p className="text-sm text-primary/80">
-                    I understand students and small businesses need fast turnarounds. That's why I guarantee a response within 2 hours!
+                    I understand students and small businesses need quality work at affordable prices. Let's make your project amazing!
                   </p>
                 </div>
               </CardContent>

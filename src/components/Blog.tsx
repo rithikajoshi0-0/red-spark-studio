@@ -3,6 +3,10 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, User, ArrowRight, Clock } from "lucide-react";
 
+import blogMarketingImage from "@/assets/blog-marketing.jpg";
+import blogDesignImage from "@/assets/blog-design.jpg";
+import blogContentImage from "@/assets/blog-content.jpg";
+
 const blogPosts = [
   {
     title: "10 Budget-Friendly Marketing Tips for College Startups",
@@ -11,7 +15,7 @@ const blogPosts = [
     readTime: "5 min read",
     date: "Dec 15, 2024",
     author: "ServiceHub Team",
-    image: "https://images.unsplash.com/photo-1556761175-b413da4baf72?w=400&h=250&fit=crop"
+    image: blogMarketingImage
   },
   {
     title: "Essential Design Principles Every Small Business Should Know",
@@ -20,7 +24,7 @@ const blogPosts = [
     readTime: "7 min read", 
     date: "Dec 12, 2024",
     author: "ServiceHub Team",
-    image: "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=400&h=250&fit=crop"
+    image: blogDesignImage
   },
   {
     title: "How to Write Content That Converts: A Student's Guide",
@@ -29,15 +33,15 @@ const blogPosts = [
     readTime: "6 min read",
     date: "Dec 10, 2024", 
     author: "ServiceHub Team",
-    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=250&fit=crop"
+    image: blogContentImage
   }
 ];
 
 const Blog = () => {
   return (
-    <section id="blog" className="py-20 bg-secondary">
+    <section id="blog" className="py-20 bg-secondary page-transition">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 fade-in">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
             Tips & Insights for Success
           </h2>
@@ -47,17 +51,17 @@ const Blog = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12 stagger-animation">
           {blogPosts.map((post, index) => (
-            <Card key={index} className="portfolio-card border-0 shadow-card overflow-hidden">
-              <div className="relative">
+            <Card key={index} className="portfolio-card border-0 shadow-card overflow-hidden group transition-all duration-500 hover:shadow-2xl">
+              <div className="relative overflow-hidden">
                 <img 
                   src={post.image} 
                   alt={post.title}
-                  className="w-full h-48 object-cover"
+                  className="w-full h-48 object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <Badge 
-                  className="absolute top-4 left-4 bg-primary text-primary-foreground"
+                  className="absolute top-4 left-4 bg-primary text-primary-foreground transition-all duration-300 group-hover:bg-primary-hover"
                 >
                   {post.category}
                 </Badge>

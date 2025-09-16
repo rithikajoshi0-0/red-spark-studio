@@ -4,11 +4,11 @@ import { CheckCircle, Star, Target, Heart } from "lucide-react";
 
 const About = () => {
   return (
-    <section id="about" className="py-20 bg-background">
+    <section id="about" className="py-20 bg-background page-transition">
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
-          <div>
+          <div className="bounce-in">
             <Badge variant="outline" className="mb-4 text-primary border-primary">
               About ServiceHub
             </Badge>
@@ -18,13 +18,13 @@ const About = () => {
             </h2>
             
             <p className="text-lg text-muted-foreground mb-6">
-              Hi! I'm a 19-year-old freelancer based in Mumbai, passionate about helping students 
+              Hi! I'm a freelancer based in Chennai, passionate about helping students 
               and small businesses succeed with professional, affordable services. Having started 
               my journey during college, I understand the unique challenges faced by young 
               entrepreneurs and students.
             </p>
             
-            <div className="space-y-4 mb-8">
+            <div className="space-y-4 mb-8 stagger-animation">
               <div className="flex items-start space-x-3">
                 <CheckCircle className="w-5 h-5 text-primary mt-1" />
                 <div>

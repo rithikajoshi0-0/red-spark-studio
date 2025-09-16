@@ -58,9 +58,9 @@ const services = [
 
 const Services = () => {
   return (
-    <section id="services" className="py-20 bg-secondary">
+    <section id="services" className="py-20 bg-secondary page-transition">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 fade-in">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
             Professional Services for Every Need
           </h2>
@@ -70,14 +70,14 @@ const Services = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12 stagger-animation">
           {services.map((service, index) => (
-            <Card key={index} className="service-card h-full border-0">
+            <Card key={index} className="service-card h-full border-0 group transition-all duration-500 hover:shadow-2xl">
               <CardHeader>
-                <div className="w-12 h-12 bg-hero-gradient rounded-lg flex items-center justify-center mb-4">
+                <div className="w-12 h-12 bg-hero-gradient rounded-lg flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110">
                   <service.icon className="w-6 h-6 text-white" />
                 </div>
-                <CardTitle className="text-xl font-semibold text-foreground">
+                <CardTitle className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors duration-300">
                   {service.title}
                 </CardTitle>
               </CardHeader>

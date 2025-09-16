@@ -49,9 +49,9 @@ const portfolioItems = [
 
 const Portfolio = () => {
   return (
-    <section id="portfolio" className="py-20 bg-background">
+    <section id="portfolio" className="py-20 bg-background page-transition">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 fade-in">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
             Featured Work & Success Stories
           </h2>
@@ -61,10 +61,10 @@ const Portfolio = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12 stagger-animation">
           {portfolioItems.map((item, index) => (
-            <Card key={index} className="portfolio-card overflow-hidden border-0 shadow-card">
-              <div className="relative group">
+            <Card key={index} className="portfolio-card overflow-hidden border-0 shadow-card group transition-all duration-700 hover:shadow-2xl hover:-translate-y-2">
+              <div className="relative group-hover:scale-105 transition-transform duration-700 overflow-hidden">
                 <img 
                   src={item.image} 
                   alt={item.title}
