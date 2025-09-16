@@ -3,9 +3,77 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
+import { useToast } from "@/hooks/use-toast";
 import { Mail, Phone, MapPin, Clock, Send } from "lucide-react";
+import { submitContactForm } from "@/lib/supabase";
+import { useState } from "react";
 
 const Contact = () => {
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    service_needed: '',
+    budget_range: '',
+    project_details: '',
+    is_student: false
+  });
+
+  const handleInputChange = (field: string, value: string | boolean) => {
+    setFormData(prev => ({
+      ...prev,
+      [field]: value
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Basic validation
+    if (!formData.name || !formData.email || !formData.service_needed || !formData.project_details) {
+      toast({
+        title: "Missing Information",
+        description: "Please fill in all required fields.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      await submitContactForm(formData);
+      
+      toast({
+        title: "Message Sent Successfully!",
+        description: "Thank you for your inquiry. I'll get back to you within 24 hours.",
+      });
+
+      // Reset form
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        service_needed: '',
+        budget_range: '',
+        project_details: '',
+        is_student: false
+      });
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      toast({
+        title: "Error Sending Message",
+        description: "There was a problem sending your message. Please try again or contact me directly.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <section id="contact" className="py-20 bg-secondary">
       <div className="container mx-auto px-4">
@@ -71,15 +139,18 @@ const Contact = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <form className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
                       <label className="text-sm font-medium text-foreground mb-2 block">
                         Your Name *
                       </label>
                       <Input 
+                        value={formData.name}
+                        onChange={(e) => handleInputChange('name', e.target.value)}
                         placeholder="Enter your full name"
                         className="bg-background border-border"
+                        required
                       />
                     </div>
                     <div>
@@ -88,8 +159,11 @@ const Contact = () => {
                       </label>
                       <Input 
                         type="email"
+                        value={formData.email}
+                        onChange={(e) => handleInputChange('email', e.target.value)}
                         placeholder="your.email@example.com"
                         className="bg-background border-border"
+                        required
                       />
                     </div>
                   </div>
@@ -100,6 +174,8 @@ const Contact = () => {
                         Phone Number
                       </label>
                       <Input 
+                        value={formData.phone}
+                        onChange={(e) => handleInputChange('phone', e.target.value)}
                         placeholder="+91 98765 43210"
                         className="bg-background border-border"
                       />
@@ -108,7 +184,7 @@ const Contact = () => {
                       <label className="text-sm font-medium text-foreground mb-2 block">
                         Service Needed *
                       </label>
-                      <Select>
+                      <Select value={formData.service_needed} onValueChange={(value) => handleInputChange('service_needed', value)} required>
                         <SelectTrigger className="bg-background border-border">
                           <SelectValue placeholder="Select a service" />
                         </SelectTrigger>
@@ -129,7 +205,7 @@ const Contact = () => {
                     <label className="text-sm font-medium text-foreground mb-2 block">
                       Project Budget (INR)
                     </label>
-                    <Select>
+                    <Select value={formData.budget_range} onValueChange={(value) => handleInputChange('budget_range', value)}>
                       <SelectTrigger className="bg-background border-border">
                         <SelectValue placeholder="Select your budget range" />
                       </SelectTrigger>
@@ -148,21 +224,32 @@ const Contact = () => {
                       Project Details *
                     </label>
                     <Textarea 
+                      value={formData.project_details}
+                      onChange={(e) => handleInputChange('project_details', e.target.value)}
                       placeholder="Tell me about your project, timeline, specific requirements, and any questions you have..."
                       rows={4}
                       className="bg-background border-border"
+                      required
                     />
                   </div>
 
                   <div className="flex items-center space-x-2">
-                    <input type="checkbox" id="student" className="rounded border-border" />
+                    <Checkbox 
+                      id="student" 
+                      checked={formData.is_student}
+                      onCheckedChange={(checked) => handleInputChange('is_student', checked as boolean)}
+                    />
                     <label htmlFor="student" className="text-sm text-muted-foreground">
                       I'm a student (15% discount applies)
                     </label>
                   </div>
 
-                  <Button className="btn-hero w-full md:w-auto px-8 py-3">
-                    Send Message & Get Quote
+                  <Button 
+                    type="submit" 
+                    disabled={isSubmitting}
+                    className="btn-hero w-full md:w-auto px-8 py-3"
+                  >
+                    {isSubmitting ? 'Sending...' : 'Send Message & Get Quote'}
                     <Send className="ml-2 w-4 h-4" />
                   </Button>
                 </form>
